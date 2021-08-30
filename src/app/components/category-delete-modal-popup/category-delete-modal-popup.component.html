@@ -1,0 +1,49 @@
+<button class="btn btn-danger" (click)="triggerModal(modalData)">Delete</button>
+
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Category</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Id</strong></td>
+            <td>{{ categoryOld.id }}</td>
+          </tr>
+          <tr>
+            <td><strong>Category Name</strong></td>
+            <td>{{ categoryOld.categoryName | uppercase }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-fill btn-primary" (click)="deleteCategory()">
+      Delete
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,53 @@
+<app-navi></app-navi>
+<div class="col-md-9">
+  <div
+    *ngIf="dataLoaded == false"
+    class="spinner-border text-primary"
+    role="status"
+  >
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <div class="mb-3" style="margin-block: 50px">
+    <input
+      type="text"
+      [(ngModel)]="filterText"
+      class="form-control"
+      id="filterText"
+      placeholder="Search"
+    />
+  </div>
+
+  <table *ngIf="dataLoaded == true" style="margin-top: 50px" class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Category Name</th>
+        <th><app-category-add-modal-popup></app-category-add-modal-popup></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories | filterCategory: filterText">
+        <td>{{ category.id }}</td>
+        <td>{{ category.categoryName | uppercase }}</td>
+        <td>
+          <div style="width: 100%; display: table">
+            <div style="display: table-row">
+              <div style="width: 100px; display: table-cell">
+                <app-category-update-modal-popup
+                  [categoryOld]="category"
+                ></app-category-update-modal-popup>
+              </div>
+              <div style="display: table-cell">
+                <app-category-delete-modal-popup
+                  [categoryOld]="category"
+                ></app-category-delete-modal-popup>
+              </div>
+            </div>
+          </div>
+          <div class="row"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

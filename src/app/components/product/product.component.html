@@ -1,0 +1,66 @@
+<app-navi></app-navi>
+<div class="row">
+  <div class="col-md-3">
+    <app-category-filter></app-category-filter>
+  </div>
+  <div class="col-md-9">
+    <div
+      *ngIf="dataLoaded == false"
+      class="spinner-border text-primary"
+      role="status"
+    >
+      <span class="visually-hidden">Loading...</span>
+    </div>
+
+    <div class="mb-3" style="margin-block: 50px">
+      <input
+        type="text"
+        [(ngModel)]="filterText"
+        class="form-control"
+        id="filterText"
+        placeholder="Search"
+      />
+    </div>
+
+    <table *ngIf="dataLoaded == true" class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Taxed Price</th>
+          <th>Stock</th>
+          <th><app-product-add-modal-popup></app-product-add-modal-popup></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products | filterProduct: filterText">
+          <td>{{ product.id }}</td>
+          <td>{{ product.productName | uppercase }}</td>
+          <td>{{ product.categoryId }}</td>
+          <td>{{ product.price | currency }}</td>
+          <td>{{ product.price | vatAdded: 18 | currency }}</td>
+          <td>{{ product.stock }}</td>
+          <td>
+            <div style="width: 100%; display: table">
+              <div style="display: table-row">
+                <div style="width: 100px; display: table-cell">
+                  <app-product-update-modal-popup
+                    [productOld]="product"
+                  ></app-product-update-modal-popup>
+                </div>
+                <div style="display: table-cell">
+                  <app-product-delete-modal-popup
+                    [productOld]="product"
+                  ></app-product-delete-modal-popup>
+                </div>
+              </div>
+            </div>
+            <div class="row"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

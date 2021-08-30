@@ -1,0 +1,51 @@
+<button class="btn btn-primary" (click)="triggerModal(modalData)">
+  Add a New Category
+</button>
+
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Category</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="content">
+      <div class="col-md-12">
+        <div class="card-body">
+          <form [formGroup]="categoryAddForm">
+            <div class="mb-3">
+              <label for="categoryName">Category Name</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="categoryName"
+                  formControlName="categoryName"
+                  class="form-control"
+                  placeholder="Category Name"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-primary" (click)="add()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
